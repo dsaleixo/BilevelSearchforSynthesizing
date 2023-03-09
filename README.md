@@ -37,7 +37,8 @@ simulated tournament with several baseline agents, including
 the best agents from the two latest MicroRTS competitions.
 
 ## Code Structure
-This repository contains both Python and Java implementations of the algorithms presented in the article. They are located in the subfolders `cant-stop-sketch-learning` and `microrts-sketch-learning`, respectively. Please refer to the `README.md` of each folder for specific information on the dependencies and how to run the code for each implementation.
+including the https://github.com/dsaleixo/MicroRTS2 project, the main file is in \LocalSearch\Tests where you can find the algorithms shown in the article.
+a DSL se encontra em LocalSearch\LS_CFG e a classe Controle tranforma uma AST em string e vice-versa
 
 ## License
 
