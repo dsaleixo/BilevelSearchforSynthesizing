@@ -33,8 +33,10 @@ public class example1 {
 			if(s.equals("1")) return new NaiveMCTS(100, -1, 100,10,0.3f, 1.0f, 0.0f, 1.0f, 0.4f, 1.0f, new RandomBiasedAI(), new SimpleSqrtEvaluationFunction3(),false);				
 			if(s.equals("2")) return new POWorkerRush(utt);
 			if(s.equals("3")) return new POLightRush(utt);
-			if(s.equals("4")) return new HeavyRush(utt);
-			if(s.equals("5")) return new RangedRush(utt);
+			if(s.equals("4")) return new RangedRush(utt);
+			if(s.equals("5")) return new HeavyRush(utt);
+			
+			
 			return null;
 	}
 	
@@ -68,7 +70,7 @@ public class example1 {
 		        
 		            if(show_mach) {
 		            	w.repaint();
-		            	Thread.sleep(1);//you can increase it if the game is too fast and you can't see it
+		            	Thread.sleep(10);//you can increase it if the game is too fast and you can't see it
 		            }
 		            
 		            gameover = gs2.cycle();
@@ -108,7 +110,7 @@ public class example1 {
 		
 		double r = match(gs2,utt,player,max,ai0,ai1,show_mach);
 		System.out.println("AI0 = "+r);
-		System.out.println("AI0 = "+(1-r));
+		System.out.println("AI1 = "+(1-r));
 
 	}
 
