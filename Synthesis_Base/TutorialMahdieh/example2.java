@@ -64,7 +64,7 @@ public class example2 extends example1 {
 		PhysicalGameState pgs = PhysicalGameState.load(path_map, utt);
 		GameState gs2 = new GameState(pgs, utt);
 		System.out.println("uncomment the last lines to see the match");
-		double r = match(gs2,utt,0,max,j,adv,true);
+		//double r = match(gs2,utt,0,max,j,adv,true);
 		//System.out.println("AI0 = "+r);
 		//System.out.println("AI0 = "+(1-r));
 
