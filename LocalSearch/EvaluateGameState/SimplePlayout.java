@@ -20,7 +20,7 @@ public class SimplePlayout implements Playout {
 
 	
 	@Override
-	public Pair<Double, BehavioralFeature> run(GameState gs,UnitTypeTable utt, int player, int max_cycle, AI ai1, AI ai2, boolean exibe) throws Exception {
+	public Pair<Double, BehavioralFeature> run(GameState gs,UnitTypeTable utt, int player, int max_cycle, AI ai1, AI ai2, boolean show_screen) throws Exception {
 		// TODO Auto-generated method stub
 		BehavioralFeature eval = new BehavioralFeature();;
 		
@@ -29,11 +29,11 @@ public class SimplePlayout implements Playout {
 		GameState gs2 = gs.cloneChangingUTT(utt);
 		boolean gameover = false;
 		JFrame w=null;
-		if(exibe) w = PhysicalGameStatePanel.newVisualizer(gs2,640,640,false,PhysicalGameStatePanel.COLORSCHEME_BLACK);
+		if(show_screen) w = PhysicalGameStatePanel.newVisualizer(gs2,640,640,false,PhysicalGameStatePanel.COLORSCHEME_BLACK);
 		boolean itbroke=false ;
 		eval.evaluate(gs2, player);
 		long aux_time;
-		int cont_atraso=0;
+		int cont_delay=0;
 		
         do {
         	
@@ -47,9 +47,9 @@ public class SimplePlayout implements Playout {
         			return new Pair<>(-1.0,new BehavioralFeature());
         		}
         		if(paraou>50) {
-        			System.out.println("demorou " +cont_atraso );
-        			cont_atraso+=1;
-        			if(cont_atraso>10) {
+        			System.out.println("delayed " +cont_delay );
+        			cont_delay+=1;
+        			if(cont_delay>10) {
         				return new Pair<>(-1.0,new BehavioralFeature());
         			}
         		}
@@ -73,7 +73,7 @@ public class SimplePlayout implements Playout {
         	  gs2.issueSafe(pa1);
         	  if(!itbroke) gs2.issueSafe(pa2);
              
-                if(exibe) {
+                if(show_screen) {
                 	w.repaint();
                 	Thread.sleep(2);
                 }
