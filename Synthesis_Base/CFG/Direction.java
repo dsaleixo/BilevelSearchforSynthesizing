@@ -65,12 +65,17 @@ String direc;
 	public int converte(Unit u,GameState gs,int player) {
 		 int x = u.getX();
 	       int y = u.getY();
-		if(this.direc.equals("Right")&& gs.free(x+1,y))return UnitAction.DIRECTION_RIGHT;
-		if(this.direc.equals("Left")&& gs.free(x-1,y))return UnitAction.DIRECTION_LEFT;
-		if(this.direc.equals("Up") && gs.free(x,y-1))return UnitAction.DIRECTION_UP;
-		if(this.direc.equals("Down")&& gs.free(x,y+1))return UnitAction.DIRECTION_DOWN;
+	       PhysicalGameState pgs = gs.getPhysicalGameState();
+		if(this.direc.equals("Right")&& x+1<pgs.getWidth())
+				if(gs.free(x+1,y))return UnitAction.DIRECTION_RIGHT;
+		if(this.direc.equals("Left")&& x-1>=0)
+				if(gs.free(x-1,y))return UnitAction.DIRECTION_LEFT;
+		if(this.direc.equals("Up") && y-1>=0)
+				if (gs.free(x,y-1))return UnitAction.DIRECTION_UP;
+		if(this.direc.equals("Down")&& y+1<pgs.getWidth())
+				if (gs.free(x,y+1))return UnitAction.DIRECTION_DOWN;
 		if(this.direc.equals("EnemyDir")) {
-			PhysicalGameState pgs = gs.getPhysicalGameState();
+			
 	       
 	        int best_direction = -1;
 	        int best_score = -1;

@@ -14,6 +14,7 @@ import EvaluateGameState.Playout;
 import EvaluateGameState.SimplePlayout;
 import LS_CFG.Empty_LS;
 import LS_CFG.FactoryLS;
+import LS_CFG.Node_LS;
 import LS_CFG.S_LS;
 import Standard.StrategyTactics;
 import ai.RandomBiasedAI;
@@ -116,21 +117,25 @@ public static double partida(GameState gs,UnitTypeTable utt, int player, int max
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		UnitTypeTable utt = new UnitTypeTable(2);
-		String path_map =getMap("9");;
+		String path_map =getMap("0");;
 		PhysicalGameState pgs = PhysicalGameState.load(path_map, utt);
 		GameState gs2 = new GameState(pgs, utt);
 		//build(Barrack,1,Up) harvest(2) train(Worker,4,Right) for(u) (build(Base,1,Left,u) train(Heavy,3,Down) train(Worker,6,Down) train(Ranged,8,Right) moveaway(Heavy,u) attack(Light,weakest,u) train(Worker,6,Right)) for(u) (if(HaveQtdEnemiesbyType(Worker,3)) then(moveaway(Ranged,u) attack(Worker,strongest,u)) if(!HaveQtdEnemiesbyType(Worker,1)) then(harvest(2,u)) else(train(Ranged,3,Down) moveaway(Worker,u) attack(Light,lessHealthy,u)) harvest(3,u) moveaway(Heavy,u)) if(!HaveUnitsStrongest(Ranged)) then(moveToUnit(Heavy,Enemy,farthest) train(Heavy,7,Left))
 	
-	
+		FactoryLS f =new FactoryLS();;
 		//BuilderDSLTreeSingleton.fullPreOrderPrint((iNodeDSLTree) A);
+		String trace = "S;S_S;S;For_S;S;S_S;S;C;Train;Heavy;EnemyDir;6;S;S_S;S;C;Train;Light;EnemyDir;4;S;S_S;S;S_S;S;C;Build;Barracks;Down;3;S;C;Idle;S;C;Train;Worker;Left;3;S;For_S;S;S_S;S;For_S;S;C;Harvest;15;S;For_S;S;C;MoveToUnit;Enemy;Weakest";
+		String adv = "S;For_S;S;S_S;S;C;Build;Barracks;Up;2;S;S_S;S;C;Train;Worker;Right;4;S;S_S;S;For_S;S;C;Train;Heavy;EnemyDir;10;S;If_B_then_S_else_S;B;is_Type;Barracks;S;S_S;S;For_S;S;S_S;S;For_S;S;C;Harvest;15;S;For_S;S;C;Train;Heavy;Right;20;S;If_B_then_S_else_S;B;CanAttack;S;C;MoveToUnit;Enemy;Weakest;S;Empty;S;S_S;S;For_S;S;If_B_then_S_else_S;B;HaveQtdUnitsAttacking;10;S;Empty;S;C;Idle;S;S_S;S;C;Harvest;7;S;C;Attack;LessHealthy";
 		
-		
-		
+		Node_LS n = (Node_LS)Control.load(trace,f);
+		AI ai1 = new Interpreter(utt,n );
 
 		//AI ai1 = new Interpreter(utt,n);
-		AI ai1 = new CoacAI(utt);
-		
-		AI ai2 =   new mayari(utt);
+		//AI ai1 = new CoacAI(utt);
+		Node_LS n2 = (Node_LS)Control.load(adv,f);
+		AI ai2 = new Interpreter(utt,n2 );
+
+		//AI ai2 =   new mayari(utt);
 		Playout playout = new SimplePlayout();
 		for(int i =0;i<1;i++) {
 			

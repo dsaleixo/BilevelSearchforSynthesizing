@@ -51,11 +51,34 @@ public class For_S implements ChildS {
 	@Override
 	public void interpret(GameState gs, int player, Unit u, Interpreter automato) throws Exception {
 		// TODO Auto-generated method stub
-		PhysicalGameState pgs = gs.getPhysicalGameState();
-		for(Unit u2:pgs.getUnits()) {
-            if(u2.getPlayer()==player)this.child.interpret(gs, player,u2, automato);
-
-		 }
+		// TODO Auto-generated method stub
+        PhysicalGameState pgs = gs.getPhysicalGameState();
+        for(Unit u2:pgs.getUnits()) {
+            String name = u2.getType().name;
+            // boolean condition = true; //name == "Worker";
+            boolean condition = name.equals("Worker");
+            if(u2.getPlayer()==player && condition) {
+                this.child.interpret(gs, player,u2, automato);
+            }
+         }
+        //  System.out.println("HERE");
+         //if (true) return;
+        for(Unit u2:pgs.getUnits()) {
+            String name = u2.getType().name;
+            boolean condition = name.equals("Barracks");
+            if(u2.getPlayer()==player && condition)this.child.interpret(gs, player,u2, automato);
+         }
+        for(Unit u2:pgs.getUnits()) {
+            String name = u2.getType().name;
+            boolean condition = name.equals("Base");
+            if(u2.getPlayer()==player && condition)this.child.interpret(gs, player,u2, automato);
+         }
+        for(Unit u2:pgs.getUnits()) {
+            String name = u2.getType().name;
+            boolean condition = (name.equals("Heavy") || name.equals("Ranged") || name.equals("Light"));
+            if(u2.getPlayer()==player && condition)this.child.interpret(gs, player,u2, automato);
+         }
+    
 
 	}
 

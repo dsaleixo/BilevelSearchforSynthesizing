@@ -75,7 +75,7 @@ public class SimplePlayout implements Playout {
              
                 if(show_screen) {
                 	w.repaint();
-                	Thread.sleep(2);
+                	Thread.sleep(20);
                 }
                 
                 gameover = gs2.cycle();
